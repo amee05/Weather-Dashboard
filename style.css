@@ -6,6 +6,10 @@ h1 {
   font-weight: bolder;
 }
 
-.container {
-  margin-top: auto;
+.hide {
+  display: none;
+}
+
+.show {
+  display: block;
 }

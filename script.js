@@ -1,12 +1,9 @@
-moment().format('L');
-// store the value of the input
-let city = $("#searchTerm").val();
-// store api key
-const apiKey = "&appid=fad38bd4800ba2115bb6a2ad756ed42b";
+let city = $("#city").val();
+const apiKey = "&appid=eaa2bc92d3ab7e018723c41b036a03c6";
 
 let date = new Date();
 
-$("#searchTerm").keypress(function (event) {
+$("#city").keypress(function (event) {
 
   if (event.keyCode === 13) {
     event.preventDefault();
@@ -18,13 +15,10 @@ $("#searchBtn").on("click", function () {
 
   $('#forecastH5').addClass('show');
 
-  // get the value of the input from user
-  city = $("#searchTerm").val();
+  city = $("#city").val();
 
-  // clear input box
-  $("#searchTerm").val("");
+  $("#city").val("");
 
-  // full url to call api
   const queryUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + apiKey;
 
   $.ajax({
@@ -33,17 +27,17 @@ $("#searchBtn").on("click", function () {
   })
     .then(function (response) {
 
-      console.log(response)
+      // console.log(response)
 
-      console.log(response.name)
-      console.log(response.weather[0].icon)
+      // console.log(response.name)
+      // console.log(response.weather[0].icon)
 
       let tempF = (response.main.temp - 273.15) * 1.80 + 32;
-      console.log(Math.floor(tempF))
+      // console.log(Math.floor(tempF))
 
-      console.log(response.main.humidity)
+      // console.log(response.main.humidity)
 
-      console.log(response.wind.speed)
+      // console.log(response.wind.speed)
 
       getCurrentConditions(response);
       getCurrentForecast(response);
@@ -59,13 +53,11 @@ function makeList() {
 
 function getCurrentConditions(response) {
 
-  // get the temperature and convert to fahrenheit 
   let tempF = (response.main.temp - 273.15) * 1.80 + 32;
   tempF = Math.floor(tempF);
 
   $('#currentCity').empty();
 
-  // get and set the content 
   const card = $("<div>").addClass("card");
   const cardBody = $("<div>").addClass("card-body");
   const city = $("<h4>").addClass("card-title").text(response.name);
@@ -75,7 +67,6 @@ function getCurrentConditions(response) {
   const wind = $("<p>").addClass("card-text current-wind").text("Wind Speed: " + response.wind.speed + " MPH");
   const image = $("<img>").attr("src", "https://openweathermap.org/img/w/" + response.weather[0].icon + ".png")
 
-  // add to page
   city.append(cityDate, image)
   cardBody.append(city, temperature, humidity, wind);
   card.append(cardBody);
@@ -94,13 +85,9 @@ function getCurrentForecast() {
     console.log(response.dt)
     $('#forecast').empty();
 
-    // variable to hold response.list
     let results = response.list;
     console.log(results)
 
-    //declare start date to check against
-    // startDate = 20
-    //have end date, endDate = startDate + 5
 
     for (let i = 0; i < results.length; i++) {
 
@@ -111,7 +98,6 @@ function getCurrentForecast() {
 
       if (results[i].dt_txt.indexOf("12:00:00") !== -1) {
 
-        // get the temperature and convert to fahrenheit 
         let temp = (results[i].main.temp - 273.15) * 1.80 + 32;
         let tempF = Math.floor(temp);
 
@@ -131,4 +117,4 @@ function getCurrentForecast() {
     }
   });
 
-} 
+}
