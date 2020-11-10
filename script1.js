@@ -2,7 +2,7 @@
 // store the value of the input
 let city = $("#search").val();
 // store api key
-const apiKey = "&appid=afaa8eea1769b4359fd8e07b2efcefbd";
+const apiKey = "&appid=eaa2bc92d3ab7e018723c41b036a03c6";
 
 let date = new Date();
 
